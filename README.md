@@ -4,3 +4,4 @@
 2. Node
 3. Chakra ui
 4. Javascript
+5. Firebase
