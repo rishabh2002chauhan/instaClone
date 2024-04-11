@@ -6,7 +6,7 @@ import ProfileHeader from '../../components/Profile/ProfileHeader'
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import useGetUserProfileByUsername from '../../hooks/useGetUserProfileByUsername'
 
-function ProfilePage() {
+const ProfilePage = () => {
 
   const {username} = useParams();
   const {isLoading, userProfile}= useGetUserProfileByUsername(username);
