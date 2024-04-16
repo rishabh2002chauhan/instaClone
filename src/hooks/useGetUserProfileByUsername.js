@@ -1,5 +1,5 @@
 import { QuerySnapshot, collection, doc, getDocs, query, where } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { firestore } from '../firebase/firebase'
 import useUserProfileStore from '../store/userProfileStore'
 import useShowToast from './useShowToast'
