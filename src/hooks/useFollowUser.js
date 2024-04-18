@@ -50,7 +50,7 @@ const useFollowUser = (userId) => {
             });
             setUserProfile({
                 ...userProfile,
-                followers: [...userProfile.following, authUser.uid]
+                followers: [...userProfile.followers, authUser.uid]
             });
 
             localStorage.setItem("user-info", JSON.stringify({
