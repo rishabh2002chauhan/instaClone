@@ -2,22 +2,31 @@ import { Flex, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import SuggestedHeader from './SuggestedHeader'
 import SuggestedUser from './SuggestedUser'
+import useGetSuggestedUser from '../../hooks/useGetSuggestedUser'
 
 function SuggestedUsers() {
+  const {isLoading, suggestedUsers} = useGetSuggestedUser();
+
+  console.log(suggestedUsers);
+
+  if(isLoading) return null;
+
   return (
     <VStack gap={4} py={6} px={8}>
         <SuggestedHeader />
-        <Flex alignItems={"center"} justifyContent={"space-between"} w={"full"}>
+        { suggestedUsers.length !== 0 && (
+          <Flex alignItems={"center"} justifyContent={"space-between"} w={"full"}>
             <Text fontSize={12} fontWeight={"bold"} color={'gray.500'}>
-                Suggested For You
+              Suggested For You
             </Text>
             <Text fontSize={12} fontWeight={"bold"} _hover={{color: 'gray.500'}} cursor={'pointer'}>
-                See All
+              See All
             </Text>    
-        </Flex>
-        <SuggestedUser name='Dan Abrahmov' followers={1392} avatar='https://bit.ly/dan-abramov' />
-        <SuggestedUser name='Ryan Florence' followers={567} avatar='https://bit.ly/ryan-florence' />
-        <SuggestedUser name='Christian Nwamba' followers={759} avatar='https://bit.ly/code-beast' /> 
+          </Flex>
+        )}
+        {suggestedUsers.map(user => (
+          <SuggestedUser user={user} key={user.id} />
+        ))}
     </VStack>
   )
 }

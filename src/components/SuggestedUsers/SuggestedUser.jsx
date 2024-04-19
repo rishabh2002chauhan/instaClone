@@ -15,9 +15,9 @@ function SuggestedUser({user, setUser}) {
             ? user.followers.filter((follower) => follower !== authUser.uid) 
             : [...user.followers, authUser.uid],
         });
-        console.log(isFollowing);
-        console.log(user);
-        console.log(authUser);
+        // console.log(isFollowing);
+        // console.log(user);
+        // console.log(authUser);
     };
 
   return (
