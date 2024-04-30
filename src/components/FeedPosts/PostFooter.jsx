@@ -3,29 +3,22 @@ import { useRef, useState } from 'react'
 import { CommentLogo, NotificationsLogo, UnlikeLogo } from '../../assets/constants';
 import usePostComment from '../../hooks/usePostComment';
 import useAuthStore from '../../store/authStore';
+import useLikePost from '../../hooks/useLikePost';
+import { timeAgo } from '../../utils/timeAgo';
 
-function PostFooter({post, username, isProfilePage}) {
-    const [liked, setLiked] = useState(false);
-    const [likes, setLikes] = useState(1000);
+function PostFooter({post, isProfilePage, creatorProfile}) {
     const {isCommenting, handlePostComment} = usePostComment();
     const [comment, setComment] = useState('');
     const authUser = useAuthStore(state => state.user);
     const commentRef = useRef(null);
+    const {isLiked, likes, handleLikePost} = useLikePost(post);
 
     const handleSubmitComment = async () =>{
         await handlePostComment(post.id, comment);
         setComment('');
     }
 
-    const handleLike = () => {
-        if(liked){
-            setLiked(false);
-            setLikes(likes - 1);
-        }else{
-           setLiked(true);
-           setLikes(likes + 1); 
-        }
-    }
+    
   return (
     <Box mb={10} marginTop={'auto'}>
         <Flex
@@ -37,11 +30,11 @@ function PostFooter({post, username, isProfilePage}) {
             mt={"4"}
         >
             <Box
-                onClick={handleLike}
+                onClick={handleLikePost}
                 fontSize={18}
                 cursor={"pointer"}
             >
-                {!liked ? (<NotificationsLogo />) : (<UnlikeLogo />)}
+                {!isLiked ? (<NotificationsLogo />) : (<UnlikeLogo />)}
             </Box>
             <Box
                 cursor={"pointer"}
@@ -54,16 +47,21 @@ function PostFooter({post, username, isProfilePage}) {
         <Text fontWeight={600} fontSize={"sm"}>
              {likes} likes
         </Text>
+        {isProfilePage && (
+            <Text fontSize='12' color={"grey"}>
+                Posted {timeAgo(post.createdAt)}
+            </Text>
+        )}
         {!isProfilePage && (
             <>
                 <Text fontSize={"sm"} fontWeight={700}>
-                    {username}{" "}
+                    {creatorProfile?.username}{" "}
                     <Text as={"span"} fontWeight={400}>
-                        feeling good
+                        {post.caption}
                     </Text>
                 </Text>
-                <Text fontSize={"sm"} color={"gray"}>
-                    view all 1000 comments. 
+                <Text fontSize={"sm"} color={"gray"} cursor={"pointer"}>
+                    view all {post.comments.length} comments. 
                 </Text> 
             </>
         )}
