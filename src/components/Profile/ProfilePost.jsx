@@ -97,8 +97,8 @@ function ProfilePost({post}) {
                         
                         {post.caption && <Caption post={post} />}
                         
-                        {post.comments.map(comment => (
-                            <Comment key={comment.id} comment={comment} />
+                        {post.comments.map((comment, idx) => (
+                            <Comment key={idx} comment={comment} />
                         ))}
                     </VStack>
                     <Divider my={4} bg={'gray.800'} />
