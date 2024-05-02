@@ -81,12 +81,12 @@ function ProfilePost({post}) {
                 <Flex flex={1} flexDir={'column'} px={10} display={{base:'none', md:'flex'}} >
                     <Flex alignItems={'center'} justifyContent={'space-between'} >
                         <Flex alignItems={'center'} gap={4}>
-                            <Avatar src={userProfile.profilePicURL} size={'sm'} name='asaprogrammer' />
+                            <Avatar src={userProfile?.profilePicURL} size={'sm'} name='asaprogrammer' />
                             <Text fontWeight={'bold'} fontSize={12}>
-                                {userProfile.username}
+                                {userProfile?.username}
                             </Text>
                         </Flex>
-                        { authUser?.uid === userProfile.uid && (
+                        { authUser?.uid === userProfile?.uid && (
                             <Button size={'sm'} bg={'transparent'} _hover={{bg:'whiteAlpha.300', color:'red.600'}} borderRadius={4} p={1} onClick={handleDeletePost} isLoading={isDeleting} >
                             <MdDelete size={20} cursor='pointer' />
                         </Button>
