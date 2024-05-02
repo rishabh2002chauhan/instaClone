@@ -40,7 +40,6 @@ const useGetSuggestedUser = () => {
     if(authUser) getSuggestedUsers();
   },[authUser, showToast])
 
-  console.log(suggestedUsers);
   return {isLoading, suggestedUsers};
 }
 

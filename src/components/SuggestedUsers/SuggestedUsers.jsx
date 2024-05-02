@@ -7,8 +7,6 @@ import useGetSuggestedUser from '../../hooks/useGetSuggestedUser'
 function SuggestedUsers() {
   const {isLoading, suggestedUsers} = useGetSuggestedUser();
 
-  console.log(suggestedUsers);
-
   if(isLoading) return null;
 
   return (
