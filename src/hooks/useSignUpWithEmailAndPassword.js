@@ -22,7 +22,7 @@ const useSignUpWithEmailAndPassword = () => {
         }
         const usersRef = collection(firestore, "users");
         const q = query(usersRef, where("username", "==", inputs.username));
-        const querySnapshot = getDocs(q);
+        const querySnapshot = await getDocs(q);
         if(!querySnapshot.empty){
             showToast('Error', 'User already exists.', 'error');
             return ;
